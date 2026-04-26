@@ -1,0 +1,45 @@
+import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:wpheadless/pages/About.dart';
+import 'package:wpheadless/pages/Index.dart';
+
+void main() {
+  runApp(const MyApp());
+}
+
+final GoRouter _router = GoRouter(
+  routes: <RouteBase>[
+    GoRoute(
+      path: '/',
+      builder: (BuildContext context, GoRouterState state) {
+        return const Index();
+      },
+      routes: <RouteBase>[
+        GoRoute(
+          path: 'about',
+          builder: (BuildContext context, GoRouterState state) {
+            return About();
+          },
+        ),
+      ],
+    ),
+  ],
+);
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  // This widget is the root of your application.
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp.router(
+      title: 'WPHeadless',
+      theme: ThemeData(
+        colorScheme: .fromSeed(seedColor: Colors.teal, brightness: Brightness.dark),
+      ),
+      routerConfig: _router,
+    );
+  }
+} 
+
+
