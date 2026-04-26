@@ -19,6 +19,7 @@ class _BlogsState extends State<Blogs> {
   void initState() {
     super.initState();
     getPostByID();
+    print('ID del post: ${widget.id}');
   }
 
   Future<void> getPostByID() async {
@@ -27,7 +28,7 @@ class _BlogsState extends State<Blogs> {
         'https://wp.maurodefalco.it/wp-json/wp/v2/posts/${widget.id}?_embed',
       );
 
-      
+
 
       setState(() {
         singlePost.add(response.data);
@@ -56,7 +57,13 @@ class _BlogsState extends State<Blogs> {
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(16),
-          child: HtmlWidget(post['content']['rendered']),
+          child: Column(
+            children: [
+              Image.network(post['_embedded']['wp:featuredmedia'][0]['source_url']),
+              const SizedBox(height: 16),
+              HtmlWidget(post['content']['rendered']),
+            ],
+          ),
         ),
       ),
     );
