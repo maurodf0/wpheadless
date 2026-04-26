@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:wpheadless/pages/About.dart';
+import 'package:wpheadless/pages/Blogs.dart';
 import 'package:wpheadless/pages/Index.dart';
 
 void main() {
@@ -21,6 +22,12 @@ final GoRouter _router = GoRouter(
             return About();
           },
         ),
+      ],
+      routes: <RouteBase>[
+        GoRoute(  
+          path: '/blog/:id',
+          builder: (context, state) => const Blogs(),
+          )
       ],
     ),
   ],

@@ -39,7 +39,8 @@ void initState() {
           children: [
             ...List.generate(posts.length, (index) => Blogitem(
               title: ' ${posts[index]['title']['rendered']}', 
-              content: '${posts[index]['excerpt']['rendered']}'
+              content: '${posts[index]['excerpt']['rendered']}',
+              link: '${posts[index]['link']}',
               )
               ),
           ],
