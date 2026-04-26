@@ -17,17 +17,18 @@ final GoRouter _router = GoRouter(
       },
       routes: <RouteBase>[
         GoRoute(
-          path: 'about',
+          path: 'blog/:id',
           builder: (BuildContext context, GoRouterState state) {
-            return About();
+            final id = state.pathParameters['id']!;
+            return Blogs(id: id);
           },
         ),
-      ],
-      routes: <RouteBase>[
-        GoRoute(  
-          path: '/blog/:id',
-          builder: (context, state) => const Blogs(),
-          )
+        GoRoute(
+          path: 'about',
+          builder: (BuildContext context, GoRouterState state) {
+            return const About();
+          },
+        ),
       ],
     ),
   ],

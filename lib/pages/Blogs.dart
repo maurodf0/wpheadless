@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
 class Blogs extends StatelessWidget {
-  const Blogs({super.key});
+  const Blogs({super.key, required this.id});
+
+  final String id;
 
   @override
   Widget build(BuildContext context) {
