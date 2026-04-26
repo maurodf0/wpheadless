@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
+import 'package:go_router/go_router.dart';
 import 'package:wpheadless/pages/widgets/BlogItem.dart';
 
 class Index extends StatefulWidget {
@@ -37,11 +38,14 @@ void initState() {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            ...List.generate(posts.length, (index) => Blogitem(
-              title: ' ${posts[index]['title']['rendered']}', 
-              content: '${posts[index]['excerpt']['rendered']}',
-              link: '${posts[index]['link']}',
-              )
+            ...List.generate(posts.length, (index) => GestureDetector(
+              onTap: () =>   context.go('/blog/${posts[index]['id']}'),
+              child: Blogitem(
+                title: ' ${posts[index]['title']['rendered']}', 
+                content: '${posts[index]['excerpt']['rendered']}',
+                link: '${posts[index]['link']}',
+                ),
+            )
               ),
           ],
         ),
