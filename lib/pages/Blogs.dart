@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 
 class Blogs extends StatefulWidget {
   const Blogs({super.key, required this.id});
@@ -26,6 +27,8 @@ class _BlogsState extends State<Blogs> {
         'https://wp.maurodefalco.it/wp-json/wp/v2/posts/${widget.id}?_embed',
       );
 
+      
+
       setState(() {
         singlePost.add(response.data);
       });
@@ -50,9 +53,11 @@ class _BlogsState extends State<Blogs> {
       appBar: AppBar(
         title: Text(post['title']['rendered']),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Text(post['content']['rendered']),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(16),
+          child: HtmlWidget(post['content']['rendered']),
+        ),
       ),
     );
   }
