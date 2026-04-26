@@ -49,17 +49,33 @@ class _BlogsState extends State<Blogs> {
     }
 
     final post = singlePost.first;
+    final featuredMedia = post['_embedded']?['wp:featuredmedia'];
+    final postTitle = post['title']['rendered'];
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(post['title']['rendered']),
+        title: Text(postTitle),
       ),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(16),
           child: Column(
             children: [
-              Image.network(post['_embedded']['wp:featuredmedia'][0]['source_url']),
+            featuredMedia != null && featuredMedia.isNotEmpty
+              ? Image.network(featuredMedia[0]['source_url'])
+              : ColoredBox(
+              color: Colors.teal, 
+              child: SizedBox(
+                height: 150, 
+                width: double.infinity,
+                child: Center(
+                  child: Text( 
+                  postTitle,
+                  style: TextStyle(color: Colors.white, fontSize: 22.0, fontWeight: FontWeight.bold),
+                  textAlign: TextAlign.center,
+                  ),
+                ),
+                )),
               const SizedBox(height: 16),
               HtmlWidget(post['content']['rendered']),
             ],
