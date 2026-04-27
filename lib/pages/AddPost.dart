@@ -1,5 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_zod/flutter_zod.dart';
+
 
 class Addpost extends StatefulWidget {
   const Addpost({super.key});
@@ -46,14 +48,18 @@ Future<void> addArticle() async {
         padding: const EdgeInsets.all(8.0),
         child: Column(
           children: [
-            TextField(
+            ZodFormField(
+              schema: ZodString().min(5, 'Title must be at least 5 characters'),
+               liveValidation: true,
               controller: titleController,
               decoration: InputDecoration(
                 labelText: 'Title',
               ),
             ),
             SizedBox(height: 20.0,),
-            TextField(
+            ZodFormField(
+              schema: ZodString().min(15, 'Content must be at least 5 characters'),
+              liveValidation: true,
               controller: contentController,
               decoration: InputDecoration(
                 labelText: 'Content',

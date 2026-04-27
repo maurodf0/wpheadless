@@ -240,6 +240,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.17.2"
+  flutter_zod:
+    dependency: "direct main"
+    description:
+      name: flutter_zod
+      sha256: a4661adff4280756e0bf51a62b39fa9839e0d08ee605d22d349942893ff35036
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.1"
   fwfh_cached_network_image:
     dependency: transitive
     description:
