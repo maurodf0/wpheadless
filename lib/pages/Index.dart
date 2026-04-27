@@ -3,6 +3,7 @@ import 'package:dio/dio.dart';
 import 'package:go_router/go_router.dart';
 import 'package:wpheadless/pages/widgets/BlogItem.dart';
 
+
 class Index extends StatefulWidget {
    const Index({super.key});
 
@@ -19,7 +20,8 @@ void getWPPosts() async {
   Response response;
   response = await dio.get('https://wp.maurodefalco.it/wp-json/wp/v2/posts?_embed');  
   setState(() {
-    posts.addAll(response.data);
+    posts.map((post) => posts.add(post)).toList(
+    );
   });
 }
 
@@ -31,6 +33,7 @@ void initState() {
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Index'),
@@ -41,6 +44,7 @@ void initState() {
             ...List.generate(posts.length, (index) => GestureDetector(
               onTap: () =>   context.go('/blog/${posts[index]['id']}'),
               child: Blogitem(
+                image_link: posts[index]['_embedded']?['wp:featuredmedia'] != null ? posts[index]['_embedded']['wp:featuredmedia'][0]['source_url'] : null,
                 title: ' ${posts[index]['title']['rendered']}', 
                 content: '${posts[index]['excerpt']['rendered']}',
                 link: '${posts[index]['link']}',
