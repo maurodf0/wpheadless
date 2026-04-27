@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:wpheadless/pages/About.dart';
+import 'package:wpheadless/pages/AddPost.dart';
 import 'package:wpheadless/pages/Blogs.dart';
 import 'package:wpheadless/pages/Index.dart';
 
@@ -30,6 +31,9 @@ final GoRouter _router = GoRouter(
             return const About();
           },
         ),
+        GoRoute(
+          path: 'add-post', 
+        builder: (context, state) => const Addpost()),
       ],
     ),
   ],

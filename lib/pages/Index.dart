@@ -17,12 +17,14 @@ final dio = Dio();
 final List posts = [];
 
 void getWPPosts() async {
-  Response response;
-  response = await dio.get('https://wp.maurodefalco.it/wp-json/wp/v2/posts?_embed');  
-  setState(() {
-    posts.map((post) => posts.add(post)).toList(
-    );
-  });
+  try {
+    final response = await dio.get('https://wp.maurodefalco.it/wp-json/wp/v2/posts?_embed');
+    setState(() {
+      posts.addAll(response.data);
+    });
+  } catch (e) {
+    debugPrint('Errore: $e');
+  }
 }
 
 @override
@@ -51,9 +53,14 @@ void initState() {
                 ),
             )
               ),
+             
           ],
         ),
       ),
+      floatingActionButton:  FloatingActionButton(
+                onPressed: () => context.go('/add-post'),
+                child: const Icon(Icons.add),
+              ),
     );
   }
 }
